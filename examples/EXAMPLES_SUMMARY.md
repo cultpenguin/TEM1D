@@ -14,10 +14,11 @@ This directory contains a complete set of examples demonstrating all major featu
 5. **example5_polygonal_loop.txt** - Square transmitter loop
 6. **example6_with_waveform.txt** - Realistic waveform convolution
 
-### Scripts (3 files)
+### Scripts (4 files)
 1. **run_example.sh** - Run a single example
 2. **run_all_examples.sh** - Run all examples sequentially
 3. **compare_examples.sh** - Generate comparison plots
+4. **clean_output.sh** - Remove all output directories
 
 ### Utilities (1 file)
 1. **plot_results.py** - Python script to visualize results

@@ -31,10 +31,11 @@ Example Files (6):
   - example5_polygonal_loop.txt          Square transmitter loop
   - example6_with_waveform.txt           Realistic waveform
 
-Scripts (3):
+Scripts (4):
   - run_example.sh         Run single example
   - run_all_examples.sh    Run all examples
   - compare_examples.sh    Plot comparisons (needs Python)
+  - clean_output.sh        Remove all output directories
 
 Documentation (4):
   - README.md              Detailed descriptions (start here!)

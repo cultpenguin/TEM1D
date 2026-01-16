@@ -21,6 +21,11 @@ To run all examples:
 ./run_all_examples.sh
 ```
 
+To clean all output directories:
+```bash
+./clean_output.sh
+```
+
 ## Example Descriptions
 
 ### Example 1: Simple 2-Layer Model (`example1_simple_2layer.txt`)
