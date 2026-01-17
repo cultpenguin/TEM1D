@@ -9,12 +9,43 @@ MODULE_NAME="pytem1d"
 VERSION=$(grep "^version" pyproject.toml | sed -E 's/.*"([0-9]+\.[0-9]+\.[0-9]+)".*/\1/')
 
 echo "=== Building $MODULE_NAME v$VERSION ==="
-echo "Note: This package requires a compiled Fortran library"
-echo "      Users must run 'make' before 'pip install -e .'"
+echo "Note: This package includes compiled Fortran libraries"
 echo "      See INSTALL.md for details"
 
+# Check for compiled libraries
+echo -e "\n=== Checking for compiled libraries ==="
+LIB_DIR="src/pytem1d/lib"
+FOUND_LIBS=0
+
+if [ -f "$LIB_DIR/libtem1d.so" ]; then
+    echo "✓ Found Linux library: libtem1d.so"
+    FOUND_LIBS=$((FOUND_LIBS + 1))
+fi
+
+if [ -f "$LIB_DIR/libtem1d.dylib" ]; then
+    echo "✓ Found macOS library: libtem1d.dylib"
+    FOUND_LIBS=$((FOUND_LIBS + 1))
+fi
+
+if [ -f "$LIB_DIR/libtem1d.dll" ]; then
+    echo "✓ Found Windows library: libtem1d.dll"
+    FOUND_LIBS=$((FOUND_LIBS + 1))
+fi
+
+if [ $FOUND_LIBS -eq 0 ]; then
+    echo "⚠ WARNING: No compiled libraries found in $LIB_DIR"
+    echo "  Run 'make' to build the library before packaging"
+    read -p "Continue anyway? [y/N] " continue_build
+    if [[ ! $continue_build =~ ^[Yy]$ ]]; then
+        echo "Aborted. Please build the library first with 'make'"
+        exit 1
+    fi
+else
+    echo "Found $FOUND_LIBS library file(s)"
+fi
+
 # Clean up old builds
-echo "Cleaning up old build artifacts..."
+echo -e "\n=== Cleaning old build artifacts ==="
 rm -rf dist/ build/ *.egg-info/
 
 # Make sure you have the required tools
@@ -23,12 +54,22 @@ pip install --upgrade pip
 pip install --upgrade build setuptools wheel twine
 
 # Build distribution packages using build module (PEP 517)
-echo "Building distribution packages..."
+echo -e "\n=== Building distribution packages ==="
 python -m build
 
-echo "=== Build complete ==="
+echo -e "\n=== Build complete ==="
 echo "Distribution files created:"
-ls -l dist/
+ls -lh dist/
+
+# Verify libraries are included in the wheel
+echo -e "\n=== Verifying library files in wheel ==="
+WHEEL_FILE=$(ls dist/*.whl 2>/dev/null | head -1)
+if [ -f "$WHEEL_FILE" ]; then
+    echo "Inspecting: $(basename $WHEEL_FILE)"
+    unzip -l "$WHEEL_FILE" | grep -E "\.so|\.dll|\.dylib" || echo "⚠ WARNING: No library files found in wheel!"
+else
+    echo "⚠ No wheel file found"
+fi
 
 # Upload to TestPyPI first
 echo -e "\n=== TestPyPI Upload ==="

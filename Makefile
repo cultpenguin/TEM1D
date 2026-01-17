@@ -25,9 +25,9 @@ SOURCES = TEMTEST.for \
           TEM1DFUNC.for
 
 # Add platform-specific files
-ifeq ($(UNAME_S),Linux)
-    SOURCES += gettim_linux.for
-endif
+#ifeq ($(UNAME_S),Linux)
+#    SOURCES += gettim_linux.for
+#endif
 
 # Include files (for dependencies)
 INCLUDES = ARRAYSDIMBL.INC \
