@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pytem1d"
-version = "0.1.0"
+version = "0.1.1"
 description = "Python interface to TEM1D Fortran code for 1D transient electromagnetic forward modeling"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -41,9 +41,8 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/tem1d/tem1d"
-Documentation = "https://github.com/tem1d/tem1d"
-Repository = "https://github.com/tem1d/tem1d"
+Homepage = "https://github.com/cultpenguin/TEM1D"
+Repository = "https://github.com/cultpenguin/TEM1D"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
