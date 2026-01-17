@@ -26,11 +26,11 @@ ifeq ($(OS),Windows_NT)
 endif
 
 # Paths
-SRC_DIR = ..
+SRC_DIR = src/pytem1d/fortran
 LIB_DIR = src/pytem1d/lib
 TARGET = $(LIB_DIR)/$(LIB_NAME)
 
-# Fortran source files (from parent directory)
+# Fortran source files (from fortran subdirectory)
 SOURCES = $(SRC_DIR)/TEM1D.for \
           $(SRC_DIR)/TEM1DRESP.for \
           $(SRC_DIR)/TEM1DRESPIP.for \
@@ -75,11 +75,11 @@ $(TARGET): $(LIB_DIR) $(SOURCES) $(INCLUDES)
 	@echo "You can now install the Python package:"
 	@echo "  pip install -e ."
 
-# Clean build artifacts and shared library
+# Clean build artifacts and shared library (platform-specific)
 clean:
 	rm -f $(OBJECTS)
 	rm -f *.mod
-	rm -f $(LIB_DIR)/*.so $(LIB_DIR)/*.dll $(LIB_DIR)/*.dylib
+	rm -f $(TARGET)
 	@echo "Cleaned build artifacts and shared library"
 
 # Alias for clean

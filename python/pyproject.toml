@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=61.0", "wheel", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "pytem1d"
-version = "0.1.1"
+version = "0.1.2"
 description = "Python interface to TEM1D Fortran code for 1D transient electromagnetic forward modeling"
 readme = "README.md"
 requires-python = ">=3.8"

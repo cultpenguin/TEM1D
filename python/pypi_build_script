@@ -9,7 +9,9 @@ MODULE_NAME="pytem1d"
 VERSION=$(grep "^version" pyproject.toml | sed -E 's/.*"([0-9]+\.[0-9]+\.[0-9]+)".*/\1/')
 
 echo "=== Building $MODULE_NAME v$VERSION ==="
-echo "Note: This package includes compiled Fortran libraries"
+echo "Note: This package includes:"
+echo "      - Pre-compiled binaries for Windows (.dll)"
+echo "      - Auto-build support for Linux/macOS (requires gfortran + make)"
 echo "      See INSTALL.md for details"
 
 # Check for compiled libraries
