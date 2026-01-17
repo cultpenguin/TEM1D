@@ -32,7 +32,7 @@ from parallel_utils import parallel_tem1d, adaptive_chunk_size
 # ============================================================================
 # CONFIGURATION
 # ============================================================================
-N_MODELS = 1000       # Fixed problem size (strong scaling)
+N_MODELS = 100000       # Fixed problem size (strong scaling)
 N_LAYERS = 8            # Fixed layer count
 RANDOM_SEED = 42        # For reproducibility
 

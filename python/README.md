@@ -10,6 +10,7 @@ Python wrapper for the TEM1D Fortran code that computes 1D transient electromagn
 - **Visualization**: Built-in plotting functions
 - **I/O utilities**: Save/load results, export to various formats
 - **Type-safe**: Data classes with validation
+- **Parallel processing**: Multiprocessing support for millions of forward models (see `examples/parallel_utils.py`)
 
 ## Installation
 
@@ -184,6 +185,8 @@ See the `examples/` directory for more usage examples:
 - `plotting_demo.py` - Visualization examples
 - `batch_random_models.py` - Batch processing 1000 random models (compares both APIs)
 - `numerical_derivatives.py` - Workaround for computing derivatives using finite differences
+- `parallel_utils.py` ⚡ **NEW** - Parallel execution utilities for large-scale processing
+- `batch_random_models_parallel.py` ⚡ **NEW** - Parallel benchmarking (7,000+ models/s on 128-core system)
 
 ## Building from Source
 
