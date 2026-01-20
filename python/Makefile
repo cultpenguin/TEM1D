@@ -39,9 +39,9 @@ SOURCES = $(SRC_DIR)/TEM1D.for \
           $(SRC_DIR)/TEM1DFUNC.for
 
 # Add platform-specific timing source
-ifeq ($(UNAME_S),Linux)
-    SOURCES += $(SRC_DIR)/gettim_linux.for
-endif
+#ifeq ($(UNAME_S),Linux)
+#    SOURCES += $(SRC_DIR)/gettim_linux.for
+#endif
 ifeq ($(UNAME_S),Darwin)
     SOURCES += $(SRC_DIR)/gettim_linux.for
 endif
