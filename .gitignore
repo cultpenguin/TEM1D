@@ -1,0 +1,13 @@
+# Python package has its own copy of Fortran sources
+python/src/pytem1d/fortran/
+
+# Compiled files
+*.o
+*.mod
+*.exe
+*.so
+src/pytem1d/lib/libtem1d.so
+
+# Temporary files
+*~
+*.tmp
