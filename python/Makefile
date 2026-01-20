@@ -22,14 +22,15 @@ endif
 ifeq ($(OS),Windows_NT)
     LIB_EXT = dll
     LIB_NAME = libtem1d.dll
+    LDFLAGS += -static-libgcc -static-libgfortran -static-libquadmath -Wl,-Bstatic,-lpthread,-Bdynamic
 endif
 
 # Paths
-SRC_DIR = ..
+SRC_DIR = src/pytem1d/fortran
 LIB_DIR = src/pytem1d/lib
 TARGET = $(LIB_DIR)/$(LIB_NAME)
 
-# Fortran source files (from parent directory)
+# Fortran source files (from fortran subdirectory)
 SOURCES = $(SRC_DIR)/TEM1D.for \
           $(SRC_DIR)/TEM1DRESP.for \
           $(SRC_DIR)/TEM1DRESPIP.for \
@@ -42,9 +43,9 @@ SOURCES = $(SRC_DIR)/TEM1D.for \
 #ifeq ($(UNAME_S),Linux)
 #    SOURCES += $(SRC_DIR)/gettim_linux.for
 #endif
-ifeq ($(UNAME_S),Darwin)
-    SOURCES += $(SRC_DIR)/gettim_linux.for
-endif
+#ifeq ($(UNAME_S),Darwin)
+#    SOURCES += $(SRC_DIR)/gettim_linux.for
+#endif
 
 # Include files (for dependencies)
 INCLUDES = $(SRC_DIR)/ARRAYSDIMBL.INC \
@@ -74,16 +75,15 @@ $(TARGET): $(LIB_DIR) $(SOURCES) $(INCLUDES)
 	@echo "You can now install the Python package:"
 	@echo "  pip install -e ."
 
-# Clean build artifacts
+# Clean build artifacts and shared library (platform-specific)
 clean:
 	rm -f $(OBJECTS)
 	rm -f *.mod
-	@echo "Cleaned build artifacts"
-
-# Clean everything including the shared library
-cleanall: clean
 	rm -f $(TARGET)
-	@echo "Cleaned all including shared library"
+	@echo "Cleaned build artifacts and shared library"
+
+# Alias for clean
+cleanall: clean
 
 # Test that library was created
 test:
@@ -103,8 +103,8 @@ help:
 	@echo ""
 	@echo "Targets:"
 	@echo "  make          - Build shared library"
-	@echo "  make clean    - Remove object files"
-	@echo "  make cleanall - Remove everything including library"
+	@echo "  make clean    - Remove all build artifacts and library"
+	@echo "  make cleanall - Same as clean"
 	@echo "  make test     - Check if library exists"
 	@echo "  make help     - Show this help"
 	@echo ""
